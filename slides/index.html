@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLATTO.A — Apresentação para restaurantes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400;600&display=swap">
+<style>
+html,body{margin:0;height:100%;background:#0a0908;overflow:hidden;font-family:'Inter',Arial,sans-serif}
+#deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center}
+.slide{position:absolute!important;inset:0;width:1920px;height:1080px;box-sizing:border-box;display:none}
+.slide:not(.on){display:none!important} .slide > :not([style*="position:absolute"]){position:relative} .slide p{line-height:1.4} .slide h1{line-height:1.1} .slide h2{line-height:1.15} .slide h3{line-height:1.2}
+.slide *{box-sizing:border-box;margin:0} .slide ul{padding-left:1.2em} .slide h1,.slide h2,.slide h3{font-weight:inherit}
+.ui{position:fixed;bottom:16px;right:16px;display:flex;gap:8px;align-items:center;font:600 13px Inter,sans-serif;color:#b9b1a6;z-index:9}
+.ui button{background:#1e1c1a;color:#f6f0e6;border:1px solid #34302c;border-radius:999px;padding:8px 14px;cursor:pointer;font:inherit}
+</style></head><body>
+<div id="deck">
+<section class="slide" id="capa" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<div style="position:absolute;left:760px;top:40px;width:1100px;height:1000px;background:radial-gradient(circle at 50% 50%, #3B2412 0%, #131211 62%)"></div>
+<p style="font-size:28px;font-weight:600;letter-spacing:6px;color:#FF7A1A;width:700px">PLATTO.A</p>
+<h1 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:104px;font-weight:800;line-height:1.02;width:820px;color:#F6F0E6">O cardápio que o cliente vê antes de pedir</h1>
+<p style="font-size:32px;line-height:1.4;color:#B9B1A6;width:720px">Pratos em 3D, foto de cada item e pedidos pelo celular, direto do QR Code da mesa.</p>
+<iframe style="position:absolute;left:840px;top:150px;width:952px;height:780px;border:0;background:transparent" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;style&gt;html,body{margin:0;height:100%;background:transparent;overflow:hidden}canvas{width:100%;height:100%;display:block}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;canvas id=&quot;c&quot;&gt;&lt;/canvas&gt;
+&lt;script&gt;
+const cv=document.getElementById(&#x27;c&#x27;),g=cv.getContext(&#x27;2d&#x27;);
+let W,H,S;function rs(){const d=Math.min(2,devicePixelRatio||1);W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;S=Math.min(W,H)*0.42}rs();addEventListener(&#x27;resize&#x27;,rs);
+let seed=7;const rnd=()=&gt;(seed=(seed*16807)%2147483647)/2147483647;
+const P=[];const add=(x,y,z,r,c)=&gt;P.push({x,y,z,r,c});
+const hex=h=&gt;[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+for(let i=0;i&lt;420;i++){const a=rnd()*6.283,d=Math.sqrt(rnd())*0.30,h=Math.max(0,0.17*(1-(d/0.30)**2))*rnd()**0.3;add(-0.36+Math.cos(a)*d,0.03+h,0.12+Math.sin(a)*d,0.034+rnd()*0.01,rnd()&lt;0.08?&#x27;#e9dcc0&#x27;:&#x27;#f7f2e6&#x27;)}
+for(let i=0;i&lt;170;i++){const a=rnd()*6.283,d=Math.sqrt(rnd())*0.2,h=Math.max(0,0.08*(1-(d/0.2)**2))*rnd()**0.4;add(0.08+Math.cos(a)*d,0.035+h,-0.42+Math.sin(a)*d,0.034+rnd()*0.008,rnd()&lt;0.5?&#x27;#5a2e1c&#x27;:&#x27;#6e3a22&#x27;)}
+for(let s=0;s&lt;3;s++){for(let i=0;i&lt;220;i++){const u=rnd()-0.5,v=rnd()-0.5,w=rnd();const top=w&gt;0.65;const x=0.34+s*0.11+u*0.09,z=0.25+v*0.42+s*0.03;add(x,0.04+w*0.07,z,0.042,top?(rnd()&lt;0.5?&#x27;#8a4a26&#x27;:&#x27;#9c5a2e&#x27;):(rnd()&lt;0.3?&#x27;#c77b5c&#x27;:&#x27;#a5532f&#x27;))}}
+for(let f=0;f&lt;9;f++){const a=rnd()*3.14,cx=-0.32+rnd()*0.22,cz=-0.38+rnd()*0.2,y0=0.04+f*0.012;for(let k=0;k&lt;22;k++){const t=k/21-0.5;add(cx+Math.cos(a)*t*0.36,y0+0.02,cz+Math.sin(a)*t*0.36,0.032,k%5==0?&#x27;#e7a93a&#x27;:&#x27;#f2c14e&#x27;)}}
+for(let i=0;i&lt;70;i++){const a=rnd()*6.283,d=Math.sqrt(rnd())*0.16;add(0.62+Math.cos(a)*d*0.6,0.05+rnd()*0.07,-0.08+Math.sin(a)*d,0.05+rnd()*0.02,rnd()&lt;0.5?&#x27;#5aa33c&#x27;:&#x27;#7cc24e&#x27;)}
+for(let i=0;i&lt;3;i++)add(0.6+(rnd()-0.5)*0.12,0.12,-0.1+(rnd()-0.5)*0.2,0.055,&#x27;#d8402f&#x27;);
+const C=P.map(p=&gt;hex(p.c));
+let ang=0.6,last=performance.now();
+const tilt=0.62,ct=Math.cos(tilt),st=Math.sin(tilt);
+function proj(x,y,z,ca,sa){const rx=x*ca-z*sa,rz=x*sa+z*ca;const yy=y*ct-rz*st,zz=y*st+rz*ct;const k=3.2/(3.2+zz*0.6);return[W/2+rx*S*k,H*0.56-yy*S*k,zz,k]}
+function ellipse(r,y,ca,sa){g.beginPath();for(let i=0;i&lt;=64;i++){const a=i/64*6.283;const q=proj(Math.cos(a)*r,y,Math.sin(a)*r,ca,sa);i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1])}g.closePath()}
+function frame(t){ang+=(t-last)*0.00035;last=t;const ca=Math.cos(ang),sa=Math.sin(ang);g.clearRect(0,0,W,H);
+g.save();ellipse(1.12,-0.05,ca,sa);g.fillStyle=&#x27;rgba(0,0,0,0.35)&#x27;;g.filter=&#x27;blur(&#x27;+(S*0.06)+&#x27;px)&#x27;;g.fill();g.restore();
+ellipse(1.0,0,ca,sa);let gr=g.createLinearGradient(0,H*0.3,0,H*0.85);gr.addColorStop(0,&#x27;#fbfaf6&#x27;);gr.addColorStop(1,&#x27;#d9d5cc&#x27;);g.fillStyle=gr;g.fill();
+ellipse(0.8,0.012,ca,sa);gr=g.createRadialGradient(W*0.45,H*0.45,0,W/2,H*0.56,S);gr.addColorStop(0,&#x27;#ffffff&#x27;);gr.addColorStop(1,&#x27;#e7e3da&#x27;);g.fillStyle=gr;g.fill();g.strokeStyle=&#x27;rgba(0,0,0,0.08)&#x27;;g.lineWidth=S*0.006;g.stroke();
+const L=P.map((p,i)=&gt;{const q=proj(p.x,p.y,p.z,ca,sa);return[q[2],q[0],q[1],p.r*S*q[3],i]}).sort((a,b)=&gt;b[0]-a[0]);
+for(const [z,x,y,r,i] of L){const c=C[i];const d=Math.max(0.55,Math.min(1.12,1.05-z*0.25));const f=v=&gt;Math.min(255,v*d|0);
+const rg=g.createRadialGradient(x-r*0.35,y-r*0.4,r*0.1,x,y,r);rg.addColorStop(0,`rgb(${f(c[0]*1.18)},${f(c[1]*1.18)},${f(c[2]*1.18)})`);rg.addColorStop(1,`rgb(${f(c[0]*0.72)},${f(c[1]*0.72)},${f(c[2]*0.72)})`);
+g.fillStyle=rg;g.beginPath();g.arc(x,y,r,0,6.283);g.fill()}
+requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;" title="Prato em 3D" aria-hidden="true"></iframe>
+<p style="position:absolute;left:840px;bottom:64px;width:952px;font-size:24px;color:#8C847A;text-align:center">Prato em 3D, girando ao vivo. No celular, o cliente gira com o dedo.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:700px;font-size:24px;color:#8C847A">Para restaurantes, hamburguerias e pizzarias</p>
+
+</section>
+
+<section class="slide" id="problema" data-transition="fade" style="background:#F6F0E6;color:#1C1916;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#1C1916">O cardápio de papel trabalha contra você</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#1C1916">Preço mudou? Reimprime tudo.</h3>
+<p style="font-size:28px;line-height:1.4;color:#5E564D">Cada ajuste de preço ou prato novo vira custo de gráfica, ou cardápio desatualizado na mesa.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#1C1916">O nome não mostra o prato</h3>
+<p style="font-size:28px;line-height:1.4;color:#5E564D">O cliente não sabe o tamanho da porção nem o que vem junto, e acaba pedindo o de sempre.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#1C1916">O garçom vira tradutor</h3>
+<p style="font-size:28px;line-height:1.4;color:#5E564D">Explicar prato por prato toma o tempo da equipe justamente no horário de pico.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#1C1916">Acabou, mas continua lá</h3>
+<p style="font-size:28px;line-height:1.4;color:#5E564D">O item esgotado segue no cardápio e o cliente só descobre na hora de pedir.</p>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="solucao" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:96px">
+<div style="flex:1;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;color:#FF7A1A">A SOLUÇÃO</p>
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">Um QR Code na mesa. O cardápio inteiro no celular.</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:row;gap:28px;align-items:center">
+<p style="width:72px;height:72px;border-radius:50%;background:#FF7A1A;color:#131211;font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:800;line-height:72px;text-align:center">1</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#F6F0E6">Aponta a câmera</h3>
+<p style="font-size:28px;line-height:1.4;color:#B9B1A6">Abre no navegador, sem baixar aplicativo.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;align-items:center">
+<p style="width:72px;height:72px;border-radius:50%;background:#FF7A1A;color:#131211;font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:800;line-height:72px;text-align:center">2</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#F6F0E6">Vê o prato antes de pedir</h3>
+<p style="font-size:28px;line-height:1.4;color:#B9B1A6">Gira em 3D, abre os ingredientes, vê a foto e o preço.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;align-items:center">
+<p style="width:72px;height:72px;border-radius:50%;background:#FF7A1A;color:#131211;font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:800;line-height:72px;text-align:center">3</p>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#F6F0E6">Pede pelo celular ou chama o garçom</h3>
+<p style="font-size:28px;line-height:1.4;color:#B9B1A6">O restaurante escolhe se recebe pedidos pelo cardápio.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="width:368px;background:#0B0A09;border:2px solid #34302C;border-radius:56px;padding:14px;box-shadow:0 30px 80px rgba(0,0,0,0.5)">
+<img src="img/ph_menu_dark.png" alt="Cardápio do PLATTO.A no celular, tema escuro, com os destaques da casa em 3D" style="width:340px;height:736px;object-fit:cover;border-radius:44px">
+</div>
+
+</section>
+
+<section class="slide" id="pratos3d" data-transition="fade" style="background:#121110;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">Gire o prato. Veja cada ingrediente.</h2>
+<p style="font-size:30px;line-height:1.4;color:#B9B1A6">Os destaques da casa são montados em 3D, peça por peça, a partir do que vai no prato.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_picanha.png" alt="Picanha grelhada em 3D: arroz, feijão, fritas e picanha fatiada no prato" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Picanha grelhada</p>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_parmegiana.png" alt="Parmegiana de filé mignon em 3D com arroz, fritas e salada" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Parmegiana de filé mignon</p>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_petit.png" alt="Petit gâteau em 3D com sorvete e morangos" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Petit gâteau</p>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_bife.png" alt="Bife à milanesa em 3D com arroz, feijão, fritas e salada" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Bife à milanesa</p>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_salmao.png" alt="Salmão grelhado em 3D com arroz, feijão e legumes" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Salmão grelhado</p>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;border:1px solid #2A2724">
+<img src="img/d3_risoto.png" alt="Risoto de cogumelos em 3D" style="width:533px;height:260px;object-fit:cover">
+<p style="position:absolute;left:24px;bottom:18px;width:480px;font-size:26px;font-weight:600;color:#F6F0E6">Risoto de cogumelos</p>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="cardapio" data-transition="fade" style="background:#F6F0E6;color:#1C1916;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:112px">
+<div style="width:368px;background:#0B0A09;border:2px solid #34302C;border-radius:56px;padding:14px;box-shadow:0 30px 70px rgba(28,25,22,0.35)">
+<img src="img/ph_dish.png" alt="Página do prato no celular: bife à milanesa em 3D com botão Ver ingredientes" style="width:340px;height:736px;object-fit:cover;border-radius:44px">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#1C1916">Achar o prato certo leva segundos</h2>
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#B34A06;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1C1916">Busca que entende sem acento: “file” acha “filé mignon”</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#B34A06;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1C1916">Abas por tipo: pratos, lanches, porções, bebidas e drinks</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#B34A06;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1C1916">Destaques da casa no topo, com o prato em 3D</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#B34A06;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1C1916">Tema claro e escuro, legível em qualquer luz</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#B34A06;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#1C1916">Acabou? A equipe marca esgotado com um toque e o cardápio atualiza na hora</p>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="pedidos" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:96px">
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">Pedido pelo celular, pago na entrega ou no caixa</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#1E1C1A;border:1px solid #2E2B28;border-radius:20px;padding:28px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:44px;height:44px;flex:none" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Entrega</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Endereço, taxa e pedido mínimo configuráveis, com troco.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#1E1C1A;border:1px solid #2E2B28;border-radius:20px;padding:28px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:44px;height:44px;flex:none" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5V21H3z"/><path d="M9 21v-7h6v7"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Retirada no balcão</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">O cliente pede antes e só passa para buscar.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center;background:#1E1C1A;border:1px solid #2E2B28;border-radius:20px;padding:28px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:44px;height:44px;flex:none" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 12 0v1"/><path d="M16 4.1a4 4 0 0 1 0 7.8M22 21v-1a6 6 0 0 0-4-5.7"/></svg>
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Na mesa</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">O QR de cada mesa já manda o número junto com o pedido.</p>
+</div>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Nada é cobrado online: o dinheiro vai direto para o restaurante, na maquininha, no Pix do balcão ou em espécie.</p>
+</div>
+<div style="width:368px;background:#0B0A09;border:2px solid #34302C;border-radius:56px;padding:14px;box-shadow:0 30px 80px rgba(0,0,0,0.5)">
+<img src="img/ph_checkout.png" alt="Tela de fechamento do pedido no celular com itens, opções de entrega, retirada e mesa e dados do cliente" style="width:340px;height:736px;object-fit:cover;border-radius:44px">
+</div>
+
+</section>
+
+<section class="slide" id="pizzaria" data-transition="fade" style="background:#F6F0E6;color:#1C1916;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:96px">
+<div style="flex:1;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#1C1916">Pronto para pizzaria e hamburgueria</h2>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#B34A06">Pizzarias</h3>
+<ul style="font-size:28px;line-height:1.45;color:#1C1916">
+<li>Meio a meio, cobrando o sabor mais caro</li>
+<li>Tamanhos: média, grande, família</li>
+<li>Borda recheada como adicional</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFCF7;border:1px solid #E4DACB;border-radius:24px;padding:40px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:40px;font-weight:700;color:#B34A06">Hamburguerias</h3>
+<ul style="font-size:28px;line-height:1.45;color:#1C1916">
+<li>Adicionais com preço: bacon, ovo, cheddar</li>
+<li>Ponto da carne</li>
+<li>Observação por item: “sem cebola”</li>
+</ul>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">As opções são criadas uma vez na categoria e valem para todos os sabores dela.</p>
+</div>
+<div style="width:368px;background:#0B0A09;border:2px solid #34302C;border-radius:56px;padding:14px;box-shadow:0 30px 70px rgba(28,25,22,0.35)">
+<img src="img/ph_pizza_sheet.png" alt="Escolhas da pizza no celular: tamanho grande, segundo sabor Portuguesa e borda de catupiry, com total de R$ 166,00" style="width:340px;height:736px;object-fit:cover;border-radius:44px">
+</div>
+
+</section>
+
+<section class="slide" id="acompanhamento" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:112px">
+<div style="width:368px;background:#0B0A09;border:2px solid #34302C;border-radius:56px;padding:14px;box-shadow:0 30px 80px rgba(0,0,0,0.5)">
+<img src="img/ph_status.png" alt="Página de acompanhamento do pedido no celular: status Em preparo e botão Enviar pedido no WhatsApp" style="width:340px;height:736px;object-fit:cover;border-radius:44px">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">O cliente acompanha o pedido sem ligar</h2>
+<div style="display:flex;flex-direction:row;flex-wrap:wrap;gap:12px;align-items:center">
+<p style="font-size:26px;font-weight:600;background:#FF7A1A;color:#131211;padding:12px 24px;border-radius:999px">Recebido</p>
+<p style="font-size:26px;color:#8C847A">→</p>
+<p style="font-size:26px;font-weight:600;background:#FF7A1A;color:#131211;padding:12px 24px;border-radius:999px">Em preparo</p>
+<p style="font-size:26px;color:#8C847A">→</p>
+<p style="font-size:26px;font-weight:600;background:#1E1C1A;border:1px solid #3A3632;color:#F6F0E6;padding:12px 24px;border-radius:999px">Saiu para entrega</p>
+<p style="font-size:26px;color:#8C847A">→</p>
+<p style="font-size:26px;font-weight:600;background:#1E1C1A;border:1px solid #3A3632;color:#F6F0E6;padding:12px 24px;border-radius:999px">Entregue</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#F6F0E6">Um toque manda o resumo do pedido no WhatsApp do restaurante</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#F6F0E6">A equipe avisa o cliente por WhatsApp ou e-mail, com a mensagem pronta</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#F6F0E6">A página atualiza sozinha, sem o cliente precisar recarregar</p>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="painel" data-transition="fade" style="background:#F6F0E6;color:#1C1916;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:44px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#1C1916">A cozinha recebe na hora, com aviso</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;background:#1C1916;border-radius:28px;padding:32px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;font-weight:600;color:#F6F0E6">Novos · 2</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2623;border:2px solid #FF7A1A;border-radius:18px;padding:24px">
+<p style="font-size:28px;font-weight:600;color:#F6F0E6">#12 · Entrega</p>
+<p style="font-size:24px;line-height:1.35;color:#C9C1B6">2x Calabresa G · ½ Portuguesa · borda Catupiry</p>
+<p style="font-size:24px;font-weight:600;background:#FF7A1A;color:#1C1916;padding:8px 16px;border-radius:12px;text-align:center">Aceitar e preparar</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2623;border:2px solid #FF7A1A;border-radius:18px;padding:24px">
+<p style="font-size:28px;font-weight:600;color:#F6F0E6">#13 · Mesa 4</p>
+<p style="font-size:24px;line-height:1.35;color:#C9C1B6">1x X-Bacon · ponto da carne: ao ponto</p>
+<p style="font-size:24px;font-weight:600;background:#FF7A1A;color:#1C1916;padding:8px 16px;border-radius:12px;text-align:center">Aceitar e preparar</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;font-weight:600;color:#F6F0E6">Em preparo · 1</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2623;border:1px solid #3A3632;border-radius:18px;padding:24px">
+<p style="font-size:28px;font-weight:600;color:#F6F0E6">#11 · Retirada</p>
+<p style="font-size:24px;line-height:1.35;color:#C9C1B6">1x Picanha grelhada · 2x Refrigerante</p>
+<p style="font-size:24px;font-weight:600;background:#3A3632;color:#F6F0E6;padding:8px 16px;border-radius:12px;text-align:center">Marcar como pronto</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;font-weight:600;color:#F6F0E6">Prontos / saiu · 1</p>
+<div style="display:flex;flex-direction:column;gap:8px;background:#2A2623;border:1px solid #3A3632;border-radius:18px;padding:24px">
+<p style="font-size:28px;font-weight:600;color:#F6F0E6">#10 · Entrega</p>
+<p style="font-size:24px;line-height:1.35;color:#C9C1B6">1x Feijoada média · troco p/ R$ 100</p>
+<p style="font-size:24px;font-weight:600;background:#3A3632;color:#F6F0E6;padding:8px 16px;border-radius:12px;text-align:center">Concluir</p>
+</div>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">Aviso sonoro · comanda para impressora térmica · pausar no pico · celular, tablet ou computador</p>
+
+</section>
+
+<section class="slide" id="gestao" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">O restaurante no controle do cardápio</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Preço e esgotado</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">O gerente muda preços e disponibilidade pelo celular.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 12 0v1"/><path d="M16 4.1a4 4 0 0 1 0 7.8M22 21v-1a6 6 0 0 0-4-5.7"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Equipe com acesso</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Gerente e garçom, cada um vê só o que precisa.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-9"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Estatísticas</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Quantos clientes abriram o cardápio e quais pratos mais olharam.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Pausar pedidos</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Cozinha cheia? Um toque e o cardápio para de aceitar.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Dados separados</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Cada restaurante só enxerga os próprios pedidos e clientes.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:24px;padding:36px">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#FF7A1A;width:48px;height:48px;flex:none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Sem aplicativo</h3>
+<p style="font-size:26px;line-height:1.4;color:#B9B1A6">Funciona no navegador de qualquer celular.</p>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="implantacao" data-transition="fade" style="background:#F6F0E6;color:#1C1916;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:64px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;color:#B34A06">IMPLANTAÇÃO</p>
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#1C1916">A gente monta tudo para você</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #FF7A1A;padding:28px 0px 0px 0px">
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1;color:#B34A06">01</p>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#1C1916">Você manda o cardápio</h3>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">PDF, foto ou o impresso mesmo.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #FF7A1A;padding:28px 0px 0px 0px">
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1;color:#B34A06">02</p>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#1C1916">Cadastramos tudo</h3>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">Categorias, itens, preços, opções e fotos de cada item.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #FF7A1A;padding:28px 0px 0px 0px">
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1;color:#B34A06">03</p>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#1C1916">Destaques em 3D</h3>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">Os pratos que mais vendem, montados ingrediente por ingrediente.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;border-top:4px solid #FF7A1A;padding:28px 0px 0px 0px">
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1;color:#B34A06">04</p>
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#1C1916">QR Codes nas mesas</h3>
+<p style="font-size:26px;line-height:1.4;color:#5E564D">Arte pronta para imprimir e equipe treinada no painel.</p>
+</div>
+</div>
+<p style="font-size:30px;line-height:1.4;color:#1C1916">Prazo para colocar no ar: <b>de 3 a 15 dias úteis</b> depois de receber o cardápio.</p>
+
+</section>
+
+<section class="slide" id="planos" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:72px;font-weight:800;line-height:1.1;color:#F6F0E6">Planos</h2>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:stretch">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:28px;padding:44px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Implantação</h3>
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:64px;font-weight:800;line-height:1.1;color:#FF7A1A">R$ 600</p>
+<p style="font-size:24px;color:#8C847A">a partir de · em até 3x no cartão</p>
+<ul style="font-size:26px;line-height:1.5;color:#D8D0C4">
+<li>Cardápio completo cadastrado</li>
+<li>Fotos de todos os itens</li>
+<li>Destaques em 3D</li>
+<li>QR Codes das mesas</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#1E1C1A;border:1px solid #2E2B28;border-radius:28px;padding:44px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Cardápio 3D</h3>
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:64px;font-weight:800;line-height:1.1;color:#FF7A1A">R$ 130</p>
+<p style="font-size:24px;color:#8C847A">por mês</p>
+<ul style="font-size:26px;line-height:1.5;color:#D8D0C4">
+<li>Cardápio com 3D e fotos</li>
+<li>Mudanças de preço e itens</li>
+<li>Painel da equipe</li>
+<li>Suporte</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#2A1A0E;border:2px solid #FF7A1A;border-radius:28px;padding:44px">
+<h3 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:36px;font-weight:700;color:#F6F0E6">Cardápio + Pedidos</h3>
+<p style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:64px;font-weight:800;line-height:1.1;color:#FF7A1A">R$ 180</p>
+<p style="font-size:24px;color:#B9A48E">por mês</p>
+<ul style="font-size:26px;line-height:1.5;color:#E6DCCF">
+<li>Tudo do Cardápio 3D</li>
+<li>Entrega, retirada e mesa</li>
+<li>Painel de pedidos ao vivo</li>
+<li>Meio a meio e adicionais</li>
+</ul>
+</div>
+</div>
+
+</section>
+
+<section class="slide" id="contato" data-transition="fade" style="background:#131211;color:#F6F0E6;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:40px">
+<div style="position:absolute;left:360px;top:120px;width:1200px;height:840px;background:radial-gradient(circle at 50% 50%, #3B2412 0%, #131211 62%)"></div>
+<p style="font-size:28px;font-weight:600;letter-spacing:6px;color:#FF7A1A;text-align:center">PLATTO.A</p>
+<h2 style="font-family:'Bricolage Grotesque', Arial, sans-serif;font-size:96px;font-weight:800;line-height:1.05;color:#F6F0E6;text-align:center;width:1300px">Vamos colocar o seu cardápio em 3D?</h2>
+<p style="font-size:34px;line-height:1.4;color:#F6F0E6;text-align:center">Victor Sousa dos Anjos</p>
+<p style="font-size:30px;line-height:1.4;color:#B9B1A6;text-align:center">victor.anjos1011@gmail.com</p>
+
+</section>
+
+</div>
+<div class="ui"><button id="prev" aria-label="Slide anterior">←</button><span id="n"></span><button id="next" aria-label="Próximo slide">→</button><button id="fs">Tela cheia</button></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=Math.max(0,Math.min(S.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function show(){S.forEach((s,k)=>s.classList.toggle('on',k===i));document.getElementById('n').textContent=(i+1)+' / '+S.length;history.replaceState(null,'','#'+(i+1))}
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('deck').style.transform='translate(-50%,-50%) scale('+k+')'}
+addEventListener('resize',fit);fit();show();
+addEventListener('hashchange',()=>{const n=(parseInt(location.hash.slice(1))||1)-1;if(n!==i){i=Math.max(0,Math.min(S.length-1,n));show()}});
+const go=d=>{i=Math.max(0,Math.min(S.length-1,i+d));show()};
+document.getElementById('prev').onclick=()=>go(-1);document.getElementById('next').onclick=()=>go(1);
+document.getElementById('fs').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{});
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))go(1);if(['ArrowLeft','PageUp'].includes(e.key))go(-1)});
+</script></body></html>

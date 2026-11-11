@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLATTO.A em 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div id="bigtitle" aria-hidden="true">PLATTO.A</div>
+<div id="stage" aria-hidden="true"></div>
+<div id="labels" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="#inicio">PLATTO<span>.</span>A</a>
+  <a class="cta-mini" href="#contato">Contato</a>
+</header>
+
+<nav class="rail" aria-label="Seções">
+  <a href="#inicio" data-i="0"><b>00</b><span>Início</span></a>
+  <a href="#prato" data-i="1"><b>01</b><span>O prato</span></a>
+  <a href="#ingredientes" data-i="2"><b>02</b><span>Ingredientes</span></a>
+  <a href="#pedido" data-i="3"><b>03</b><span>Pedido</span></a>
+  <a href="#pizzaria" data-i="4"><b>04</b><span>Pizzarias</span></a>
+  <a href="#cozinha" data-i="5"><b>05</b><span>Cozinha</span></a>
+  <a href="#planos" data-i="6"><b>06</b><span>Planos</span></a>
+  <a href="#contato" data-i="7"><b>07</b><span>Contato</span></a>
+</nav>
+
+<main>
+  <section id="inicio" class="sec hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Cardápio digital em 3D · restaurantes, hamburguerias e pizzarias</p>
+      <h1 class="hero-line">O cliente vê o prato <em>antes</em> de pedir.</h1>
+      <p class="lead">Um QR Code na mesa abre o cardápio no celular, com cada destaque da casa em 3D.</p>
+    </div>
+    <p class="scroll-hint">Role para descobrir</p>
+  </section>
+
+  <section id="prato" class="sec left">
+    <div class="copy">
+      <p class="eyebrow"><b>01</b> O prato</p>
+      <h2>Gire, aproxime, <em>escolha.</em></h2>
+      <p>Arroz, feijão, fritas e a picanha fatiada: o cliente gira o prato com o dedo e vê exatamente o que vai chegar à mesa.</p>
+      <ul class="chips"><li>Gira 360°</li><li>Aproxima com pinça</li><li>Sem baixar aplicativo</li></ul>
+    </div>
+  </section>
+
+  <section id="ingredientes" class="sec left">
+    <div class="copy">
+      <p class="eyebrow"><b>02</b> Ingredientes</p>
+      <h2>Camada por <em>camada.</em></h2>
+      <p>Um toque em “Ver ingredientes” separa o prato em partes, cada uma com o nome. Ajuda quem tem dúvida e quem tem restrição.</p>
+    </div>
+  </section>
+
+  <section id="pedido" class="sec right">
+    <div class="copy">
+      <p class="eyebrow"><b>03</b> Do QR ao pedido</p>
+      <h2>Pede pelo celular. <em>Paga no balcão.</em></h2>
+      <p>Entrega, retirada ou direto da mesa. Nada é cobrado online: o pagamento é feito na entrega ou no caixa, e o dinheiro vai direto para o restaurante.</p>
+      <div class="phones">
+        <img class="phone back" src="./src/img/ph_menu_dark.jpg" alt="Cardápio no celular com os destaques da casa em 3D">
+        <img class="phone front" src="./src/img/ph_checkout.jpg" alt="Fechamento do pedido no celular com entrega, retirada ou mesa">
+      </div>
+    </div>
+  </section>
+
+  <section id="pizzaria" class="sec left">
+    <div class="copy">
+      <p class="eyebrow"><b>04</b> Pizzarias e hamburguerias</p>
+      <h2>Meio a meio, borda, <em>ponto da carne.</em></h2>
+      <div class="split">
+        <div>
+          <h3>Pizzarias</h3>
+          <ul class="ticks"><li>Meio a meio cobrando o sabor mais caro</li><li>Tamanhos média, grande e família</li><li>Borda recheada como adicional</li></ul>
+        </div>
+        <div>
+          <h3>Hamburguerias</h3>
+          <ul class="ticks"><li>Adicionais com preço</li><li>Ponto da carne</li><li>Observação por item</li></ul>
+        </div>
+      </div>
+      <div class="phones single">
+        <img class="phone front" src="./src/img/ph_pizza_sheet.jpg" alt="Escolha de tamanho, segundo sabor e borda de uma pizza no celular">
+      </div>
+    </div>
+  </section>
+
+  <section id="cozinha" class="sec right">
+    <div class="copy wide">
+      <p class="eyebrow"><b>05</b> A cozinha em tempo real</p>
+      <h2>O pedido chega <em>na hora.</em></h2>
+      <p>O painel toca um aviso a cada pedido novo. A equipe aceita, marca como pronto e imprime a comanda. O cliente acompanha tudo pelo link, sem precisar ligar.</p>
+      <div class="board" aria-label="Exemplo do painel de pedidos">
+        <div class="col"><p class="col-h">Novos · 2</p>
+          <div class="ticket hot"><b>#12 · Entrega</b><span>2x Calabresa G · ½ Portuguesa</span><i>Aceitar e preparar</i></div>
+          <div class="ticket hot"><b>#13 · Mesa 4</b><span>1x X-Bacon · ao ponto</span><i>Aceitar e preparar</i></div>
+        </div>
+        <div class="col"><p class="col-h">Em preparo · 1</p>
+          <div class="ticket"><b>#11 · Retirada</b><span>1x Picanha grelhada</span><i>Marcar como pronto</i></div>
+        </div>
+        <div class="col"><p class="col-h">Prontos · 1</p>
+          <div class="ticket"><b>#10 · Entrega</b><span>Feijoada média · troco p/ R$ 100</span><i>Concluir</i></div>
+        </div>
+      </div>
+      <p class="note">Exemplo ilustrativo do painel.</p>
+    </div>
+  </section>
+
+  <section id="planos" class="sec center">
+    <div class="copy plans-wrap">
+      <p class="eyebrow"><b>06</b> Planos</p>
+      <h2>Simples de <em>começar.</em></h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Implantação</h3>
+          <p class="price"><small>a partir de</small> R$ 600</p>
+          <p class="cond">em até 3x no cartão de crédito</p>
+          <ul class="ticks"><li>Cardápio completo cadastrado</li><li>Fotos de todos os itens</li><li>Destaques em 3D</li><li>QR Codes das mesas</li></ul>
+        </article>
+        <article class="plan">
+          <h3>Cardápio 3D</h3>
+          <p class="price">R$ 130</p>
+          <p class="cond">por mês</p>
+          <ul class="ticks"><li>Cardápio com 3D e fotos</li><li>Mudanças de preço e itens</li><li>Painel da equipe</li><li>Suporte</li></ul>
+        </article>
+        <article class="plan hot">
+          <h3>Cardápio + Pedidos</h3>
+          <p class="price">R$ 180</p>
+          <p class="cond">por mês</p>
+          <ul class="ticks"><li>Tudo do Cardápio 3D</li><li>Entrega, retirada e mesa</li><li>Pedidos ao vivo na cozinha</li><li>Meio a meio e adicionais</li></ul>
+        </article>
+      </div>
+      <p class="note">No ar em 3 a 15 dias úteis depois de receber o cardápio.</p>
+    </div>
+  </section>
+
+  <section id="contato" class="sec center final">
+    <div class="copy">
+      <p class="eyebrow"><b>07</b> Contato</p>
+      <h2 class="cta">Vamos colocar o seu cardápio <em>em 3D?</em></h2>
+      <div class="contact">
+        <div>
+          <p class="who">Victor Sousa dos Anjos</p>
+          <p class="mail">victor.anjos1011@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
